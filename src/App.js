@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { analytics, createGoogleTag } from "./google-analytics";
 
 function App() {
+  console.log("analytics", { analytics });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+
+          function gtag() {
+            window.dataLayer.push({
+              event: "form_submit",
+              data: "This is a form submit",
+            });
+          }
+
+          gtag();
+        }}
+      >
+        Form Submit
+      </button>
+      {createGoogleTag()}
     </div>
   );
 }
